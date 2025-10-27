@@ -1,0 +1,13 @@
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/": "pages/index.js",
+  "/collections/necklaces": "pages/collections/necklaces.js",
+  "/collections/rings": "pages/collections/rings.js",
+  "/collections/daily-wear": "pages/collections/daily-wear.js",
+  "/about": "pages/about.js",
+  "/collections/bracelets": "pages/collections/bracelets.js",
+  "/collections/mangalsutra": "pages/collections/mangalsutra.js",
+  "/cart": "pages/cart.js"
+}
