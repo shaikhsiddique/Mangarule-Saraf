@@ -39,12 +39,21 @@ export default function Home() {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  
     timeoutRef.current = setTimeout(() => {
       setIndex((i) => (i + 1) % BANNER_IMAGES.length);
     }, 3500);
-    return () => timeoutRef.current && clearTimeout(timeoutRef.current);
+  
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
   }, [index]);
+  
 
   return (
     <div>
