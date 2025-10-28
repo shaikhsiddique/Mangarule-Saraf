@@ -1,17 +1,20 @@
 import Head from "next/head";
 import ProductCard from "../../components/ProductCard";
+import { useCart } from "../../context/CartContext";
+import Link from "next/link";
 
 const IMAGES = [
-  "https://cdn.pixabay.com/photo/2018/12/10/21/45/jewellery-3868484_1280.jpg",
-  "https://cdn.pixabay.com/photo/2015/09/18/19/03/africa-943422_1280.jpg",
-  "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80",
-  "https://cdn.pixabay.com/photo/2021/06/20/03/18/mangalsutra-6350168_1280.jpg",
-  "https://cdn.pixabay.com/photo/2014/09/21/17/56/jewelry-455111_1280.jpg",
-  "https://cdn.pixabay.com/photo/2016/03/27/22/16/ring-1285469_1280.jpg",
-  "https://cdn.pixabay.com/photo/2018/03/24/10/10/rings-3253340_1280.jpg",
-  "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1468746582214-d9a91807b3b8?auto=format&fit=crop&w=400&q=80"
+  "https://plus.unsplash.com/premium_photo-1682092635235-d775b3103eb8?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
+  "https://plus.unsplash.com/premium_photo-1669977749936-1343d0b0b4d9?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=774",
+  "https://plus.unsplash.com/premium_photo-1669977749819-d8737b4408f7?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1178",
+ "https://images.unsplash.com/photo-1685970731194-e27b477e87ba?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=688",
+  "https://images.unsplash.com/photo-1721103418218-416182aca079?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  "https://images.unsplash.com/photo-1682823544433-aae34df4e3da?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  // Additional jewelry images
+  "https://images.unsplash.com/photo-1650785468216-39788ac5a0dd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  "https://images.unsplash.com/photo-1680690935158-7b7f2d5259dd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735",
+  "https://images.unsplash.com/photo-1705326453292-f3d35cd96514?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  "https://images.unsplash.com/photo-1739194097821-a0fbea48a3f0?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=688",
 ];
 const PRICES = [
   '₹11,980', '₹9,990', '₹12,599', '₹8,700', '₹14,550', '₹10,300', '₹7,900', '₹13,299', '₹8,499', '₹12,100'
@@ -39,6 +42,7 @@ const productTypes = [
 ];
 
 export default function Mangalsutra() {
+  const { addToCart } = useCart();
   return (
     <div className="bg-ms-cream min-h-screen">
       <Head>
@@ -110,7 +114,7 @@ export default function Mangalsutra() {
           <div className="flex-1">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {IMAGES.map((src, i) => (
-                <div key={i} className="bg-white rounded-xl shadow-ms-card overflow-hidden hover:shadow-xl transition-shadow group">
+                <Link href={`/product/mangalsutra-${i}`} key={i} className="bg-white rounded-xl shadow-ms-card overflow-hidden hover:shadow-xl transition-shadow group">
                   <div className="relative">
                     <img src={src} alt={`Mangalsutra ${i+1}`} className="w-full h-64 object-cover" />
                     {/* Badge */}
@@ -140,11 +144,14 @@ export default function Mangalsutra() {
                     </div>
                     <p className="text-sm text-ms-gold hover:text-ms-dark cursor-pointer mb-2">Check delivery date</p>
                     <h3 className="font-heading text-ms-gold text-base mb-3">Mangalsutra #{i+1}</h3>
-                    <button className="w-full bg-ms-gold hover:bg-ms-dark text-white py-2 rounded-lg font-heading transition-colors">
+                    <button 
+                      onClick={() => addToCart({ id: `mangalsutra-${i}`, name: `Mangalsutra #${i+1}`, image: src, price: PRICES[i % PRICES.length], type: 'Mangalsutra' })}
+                      className="w-full bg-white border-2 border-ms-gold text-black hover:bg-ms-gold-light py-2 rounded-lg font-heading transition-colors"
+                    >
                       Add to Cart
                     </button>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

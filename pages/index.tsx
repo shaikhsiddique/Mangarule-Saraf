@@ -56,7 +56,7 @@ export default function Home() {
       
 
       {/* Hero Section - Timeless Elegance */}
-      <div className="relative min-h-[80vh] flex items-center justify-center overflow-hidden rounded-2xl shadow-ms-card mb-12">
+      <div className="relative min-h-[80vh] flex items-center justify-center overflow-hidden rounded-b-2xl shadow-ms-card mb-12">
         {/* Background Image */}
         <div className="absolute inset-0">
           <img 
@@ -64,17 +64,19 @@ export default function Home() {
             alt="Luxury Jewelry" 
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/20"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-black/10"></div>
         </div>
         
         {/* Hero Content */}
         <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-heading font-bold mb-4">
-            <span className="block text-white">Timeless Elegance</span>
-            <span className="block gradient-gold-silver bg-clip-text text-transparent">Crafted Forever</span>
+          <h1 className="text-5xl md:text-7xl font-heading font-extrabold mb-3 drop-shadow-[0_2px_8px_rgba(0,0,0,0.65)]">
+            <span className="block">Timeless Elegance</span>
           </h1>
+          <div className="text-lg md:text-2xl font-heading text-white/90 mb-5 drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">
+            Crafted for life’s precious moments
+          </div>
           
-          <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-white mb-8 max-w-2xl mx-auto leading-relaxed drop-shadow-[0_1px_3px_rgba(0,0,0,0.6)]">
             Discover handcrafted jewelry that captures life's most precious moments. Each piece tells a story of exceptional artisanship and enduring beauty.
           </p>
           
@@ -87,7 +89,7 @@ export default function Home() {
             </Link>
             <Link 
               href="/about" 
-              className="bg-white/10 backdrop-blur-sm border-2 border-ms-gold text-ms-gold-light px-8 py-4 rounded-full font-heading font-semibold text-lg hover:bg-white hover:text-ms-gold transition-all duration-300"
+              className="bg-white border-2 border-ms-gold text-black px-8 py-4 rounded-full font-heading font-semibold text-lg hover:bg-ms-gold-light transition-all duration-300"
             >
               Schedule Consultation
             </Link>
@@ -106,31 +108,36 @@ export default function Home() {
       <div className="max-w-7xl mx-auto px-4 mb-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           {/* Left: Featured Collection */}
-          <div className="gradient-gold-silver rounded-xl p-8 text-white relative overflow-hidden shadow-ms-gold">
-            <div className="relative z-10">
-              <h2 className="font-heading text-3xl font-bold mb-2">MANGAULE SARAF</h2>
-              <p className="text-lg mb-6 opacity-90">Celebrate with Elegance</p>
-              <Link href="/collections/necklaces" className="inline-block bg-white text-ms-gold px-6 py-3 rounded-full font-heading font-semibold hover:bg-gray-100 transition-colors shadow-lg">
+          <div className="relative rounded-xl overflow-hidden shadow-ms-gold min-h-[260px]">
+            <img
+              src={featuredProducts[0].image}
+              alt="Featured Collection"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/40" />
+            <div className="relative z-10 p-8 text-white">
+              <h2 className="font-heading text-3xl font-bold mb-2">MANGARULE SARAF</h2>
+              <p className="text-lg text-white/90 mb-6">Celebrate with Elegance</p>
+              <Link href="/collections/necklaces" className="inline-block bg-white border-2 border-ms-gold text-black px-6 py-3 rounded-full font-heading font-semibold hover:bg-ms-gold-light transition-colors shadow-lg">
                 Explore Collection
               </Link>
-            </div>
-            <div className="absolute top-4 right-4 w-32 h-32 opacity-20">
-              <img src={featuredProducts[0].image} alt="Featured" className="w-full h-full object-cover rounded-full" />
             </div>
           </div>
 
           {/* Right: Latest Designs */}
-          <div className="gradient-silver-gold rounded-xl p-8 text-white relative overflow-hidden shadow-ms-silver">
-            <div className="relative z-10">
+          <div className="relative rounded-xl overflow-hidden shadow-ms-silver min-h-[260px]">
+            <img
+              src={featuredProducts[1].image}
+              alt="Latest Designs"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/35" />
+            <div className="relative z-10 p-8 text-white">
               <h2 className="font-heading text-3xl font-bold mb-2">LATEST Designs</h2>
-              <p className="text-lg mb-6 opacity-90">All that glitters, now with a festive twist!</p>
-              <Link href="/collections/earrings" className="inline-block bg-white text-ms-silver-dark px-6 py-3 rounded-full font-heading font-semibold hover:bg-gray-100 transition-colors shadow-lg">
+              <p className="text-lg text-white/90 mb-6">All that glitters, now with a festive twist!</p>
+              <Link href="/collections/earrings" className="inline-block bg-white border-2 border-ms-gold text-black px-6 py-3 rounded-full font-heading font-semibold hover:bg-ms-gold-light transition-colors shadow-lg">
                 SHOP NOW
               </Link>
-            </div>
-            <div className="absolute top-4 right-4 flex gap-2">
-              <img src={featuredProducts[1].image} alt="Latest 1" className="w-16 h-16 object-cover rounded shadow-lg" />
-              <img src={featuredProducts[2].image} alt="Latest 2" className="w-16 h-16 object-cover rounded shadow-lg" />
             </div>
           </div>
         </div>
@@ -138,27 +145,33 @@ export default function Home() {
         {/* Service Promotions */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           {/* Fast Delivery */}
-          <div className="gradient-violet-gold rounded-xl p-8 text-white relative overflow-hidden shadow-ms-card">
-            <div className="relative z-10">
+          <div className="relative rounded-xl overflow-hidden shadow-ms-card min-h-[220px]">
+            <img
+              src="https://images.unsplash.com/photo-1517840933437-c41356892b35?auto=format&fit=crop&w=1200&q=80"
+              alt="Fast delivery"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/45" />
+            <div className="relative z-10 p-8 text-white">
               <h3 className="font-heading text-2xl font-bold mb-2">Jewelry delivered in just <span className="text-ms-gold-light">6 hours</span></h3>
-              <p className="text-lg opacity-90">Mumbai | Delhi-NCR | Bengaluru</p>
+              <p className="text-lg text-white/90">Mumbai | Delhi-NCR | Bengaluru</p>
             </div>
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12"></div>
           </div>
 
           {/* Contact Support */}
-          <div className="gradient-gold-violet rounded-xl p-8 text-white relative overflow-hidden shadow-ms-gold">
-            <div className="relative z-10">
+          <div className="relative rounded-xl overflow-hidden shadow-ms-gold min-h-[220px]">
+            <img
+              src="https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=1200&q=80"
+              alt="Expert support"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/40" />
+            <div className="relative z-10 p-8 text-white">
               <h3 className="font-heading text-2xl font-bold mb-2">Need Help Choosing?</h3>
-              <p className="text-lg opacity-90 mb-4">Our experts are here to help</p>
-              <button className="bg-white text-ms-gold px-6 py-2 rounded-full font-heading font-semibold hover:bg-gray-100 transition-colors shadow-lg">
+              <p className="text-lg text-white/90 mb-4">Our experts are here to help</p>
+              <button className="bg-white border-2 border-ms-gold text-black px-6 py-2 rounded-full font-heading font-semibold hover:bg-ms-gold-light transition-colors shadow-lg">
                 Chat Now
               </button>
-            </div>
-            <div className="absolute top-4 right-4 w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-              <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-              </svg>
             </div>
           </div>
         </div>

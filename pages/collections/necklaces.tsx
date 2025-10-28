@@ -1,18 +1,22 @@
 import Head from "next/head";
 import ProductCard from "../../components/ProductCard";
 import Link from "next/link";
+import { useCart } from "../../context/CartContext";
 
 const IMAGES = [
-  "https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1468746582214-d9a91807b3b8?auto=format&fit=crop&w=400&q=80",
-  "https://cdn.pixabay.com/photo/2016/11/29/04/18/adult-1866792_1280.jpg",
-  "https://cdn.pixabay.com/photo/2017/01/20/00/30/people-1990737_1280.jpg",
-  "https://cdn.pixabay.com/photo/2014/09/21/17/56/jewelry-455111_1280.jpg",
-  "https://cdn.pixabay.com/photo/2020/12/08/19/43/woman-5815572_1280.jpg"
+  // Unsplash selection
+  "https://plus.unsplash.com/premium_photo-1674255466849-b23fc5f5d3eb?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  "https://images.unsplash.com/photo-1610694955371-d4a3e0ce4b52?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  "https://images.unsplash.com/photo-1708390250220-803af1100d31?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  "https://images.unsplash.com/photo-1685970731194-e27b477e87ba?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=688",
+  "https://images.unsplash.com/photo-1721103418218-416182aca079?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  "https://images.unsplash.com/photo-1682823544433-aae34df4e3da?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  // Additional jewelry images
+  "https://images.unsplash.com/photo-1650785468216-39788ac5a0dd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  "https://images.unsplash.com/photo-1680690935158-7b7f2d5259dd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735",
+  "https://images.unsplash.com/photo-1705326453292-f3d35cd96514?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  "https://images.unsplash.com/photo-1739194097821-a0fbea48a3f0?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=688",
+ 
 ];
 const PRICES = [
   '₹3,990', '₹2,750', '₹5,500', '₹2,999', '₹4,299', '₹6,200', '₹3,799', '₹2,950', '₹4,849', '₹2,599'
@@ -40,6 +44,7 @@ const productTypes = [
 ];
 
 export default function Necklaces() {
+  const { addToCart } = useCart();
   return (
     <div className="bg-ms-cream min-h-screen">
       <Head>
@@ -144,9 +149,9 @@ export default function Necklaces() {
                     <button 
                       onClick={(e) => {
                         e.preventDefault();
-                        // Add to cart logic here
+                        addToCart({ id: `necklace-${i}`, name: `Designer Necklace #${i+1}`, image: src, price: PRICES[i % PRICES.length], type: 'Necklaces' });
                       }}
-                      className="w-full bg-ms-gold hover:bg-ms-dark text-white py-2 rounded-lg font-heading transition-colors"
+                      className="w-full bg-white border-2 border-ms-gold text-black hover:bg-ms-gold-light py-2 rounded-lg font-heading transition-colors"
                     >
                       Add to Cart
                     </button>

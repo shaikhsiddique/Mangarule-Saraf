@@ -1,17 +1,19 @@
 import Head from "next/head";
 import ProductCard from "../../components/ProductCard";
+import { useCart } from "../../context/CartContext";
+import Link from "next/link";
 
 const IMAGES = [
-  "https://images.unsplash.com/photo-1455656678494-4d1d8c8e7ad3?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1502741126161-b048400d98b2?auto=format&fit=crop&w=400&q=80",
-  "https://cdn.pixabay.com/photo/2015/07/02/10/22/hands-828653_1280.jpg",
-  "https://cdn.pixabay.com/photo/2017/01/20/00/30/people-1990737_1280.jpg",
-  "https://cdn.pixabay.com/photo/2014/09/21/17/56/jewelry-455111_1280.jpg",
-  "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=400&q=80",
-  "https://cdn.pixabay.com/photo/2016/11/29/09/15/adult-1866792_1280.jpg"
+  "https://images.unsplash.com/photo-1633810543462-77c4a3b13f07?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=764",
+  "https://images.unsplash.com/photo-1708221235482-a6e2a807198f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  "https://images.unsplash.com/photo-1708389828485-66de31e8a165?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  "https://images.unsplash.com/photo-1708389828432-a5bccf98bb01?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  "https://images.unsplash.com/photo-1708389828426-352ec7241c8e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  "https://images.unsplash.com/photo-1723522938779-d434eb9294d4?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
+  "https://images.unsplash.com/photo-1723522938880-12dedc1275a5?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
+  "https://plus.unsplash.com/premium_photo-1671641737519-841d15b5211f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  "https://images.unsplash.com/photo-1597006354775-2955b15ec026?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  "https://images.unsplash.com/photo-1708221235482-a6e2a807198f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"
 ];
 const PRICES = [
   '₹8,990', '₹3,700', '₹2,190', '₹4,999', '₹6,299', '₹5,800', '₹7,990', '₹4,349', '₹3,850', '₹4,599'
@@ -39,6 +41,7 @@ const productTypes = [
 ];
 
 export default function Bracelets() {
+  const { addToCart } = useCart();
   return (
     <div className="bg-ms-cream min-h-screen">
       <Head>
@@ -110,7 +113,7 @@ export default function Bracelets() {
           <div className="flex-1">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {IMAGES.map((src, i) => (
-                <div key={i} className="bg-white rounded-xl shadow-ms-card overflow-hidden hover:shadow-xl transition-shadow group">
+                <Link href={`/product/bracelet-${i}`} key={i} className="bg-white rounded-xl shadow-ms-card overflow-hidden hover:shadow-xl transition-shadow group">
                   <div className="relative">
                     <img src={src} alt={`Bracelet ${i+1}`} className="w-full h-64 object-cover" />
                     {/* Badge */}
@@ -140,11 +143,14 @@ export default function Bracelets() {
                     </div>
                     <p className="text-sm text-ms-gold hover:text-ms-dark cursor-pointer mb-2">Check delivery date</p>
                     <h3 className="font-heading text-ms-gold text-base mb-3">Bangle/Bracelet #{i+1}</h3>
-                    <button className="w-full bg-ms-gold hover:bg-ms-dark text-white py-2 rounded-lg font-heading transition-colors">
+                    <button 
+                      onClick={() => addToCart({ id: `bracelet-${i}`, name: `Bangle/Bracelet #${i+1}`, image: src, price: PRICES[i % PRICES.length], type: 'Bracelets' })}
+                      className="w-full bg-white border-2 border-ms-gold text-black hover:bg-ms-gold-light py-2 rounded-lg font-heading transition-colors"
+                    >
                       Add to Cart
                     </button>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

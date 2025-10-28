@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 export default function Cart() {
-  const { cart, addToCart, removeFromCart, clearCart } = useCart();
+  const { cart, addToCart, decrementQuantity, removeFromCart, clearCart } = useCart();
   function getPriceValue(price: string|undefined) {
     return parseInt((price || '').replace(/[^\d]/g, ''), 10) || 0;
   }
@@ -51,7 +51,7 @@ export default function Cart() {
                     <div className="flex gap-3 items-center">
                       <button onClick={() => addToCart(item)} className="bg-ms-gold hover:bg-ms-dark text-white rounded-full w-7 h-7 flex items-center justify-center">+</button>
                       <span className="min-w-[2rem] text-center font-heading">{item.quantity}</span>
-                      <button onClick={() => handleRemove(item.id, item.name)} className="bg-ms-gold hover:bg-ms-dark text-white rounded-full w-7 h-7 flex items-center justify-center">-</button>
+                      <button onClick={() => decrementQuantity(item.id)} className="bg-ms-gold hover:bg-ms-dark text-white rounded-full w-7 h-7 flex items-center justify-center">-</button>
                     </div>
                   </div>
                   <button onClick={() => handleRemove(item.id, item.name)} className="ml-3 text-xs text-ms-gold hover:text-red-600 px-2 py-1 rounded transition border border-transparent hover:border-red-200">Remove</button>

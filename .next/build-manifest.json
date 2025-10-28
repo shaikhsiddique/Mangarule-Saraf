@@ -12,11 +12,6 @@
   ],
   "rootMainFiles": [],
   "pages": {
-    "/": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/index.js"
-    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -26,11 +21,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
-    ],
-    "/about": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/about.js"
     ],
     "/cart": [
       "static/chunks/webpack.js",
@@ -47,10 +37,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/collections/daily-wear.js"
     ],
-    "/collections/mangalsutra": [
+    "/collections/earrings": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/collections/mangalsutra.js"
+      "static/chunks/pages/collections/earrings.js"
     ],
     "/collections/necklaces": [
       "static/chunks/webpack.js",
@@ -61,6 +51,11 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/collections/rings.js"
+    ],
+    "/product/[id]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/product/[id].js"
     ]
   },
   "ampFirstPages": []

@@ -1,17 +1,18 @@
 import Head from "next/head";
-import ProductCard from "../../components/ProductCard";
+import { useCart } from "../../context/CartContext";
+import Link from "next/link";
 
 const IMAGES = [
-  "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1502741126161-b048400d98b2?auto=format&fit=crop&w=400&q=80",
-  "https://cdn.pixabay.com/photo/2017/01/20/00/30/people-1990737_1280.jpg",
-  "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80",
-  "https://cdn.pixabay.com/photo/2016/11/29/09/15/adult-1866792_1280.jpg",
-  "https://cdn.pixabay.com/photo/2020/12/08/19/43/woman-5815572_1280.jpg",
-  "https://images.unsplash.com/photo-1468746582214-d9a91807b3b8?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=400&q=80",
-  "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80"
+  "https://plus.unsplash.com/premium_photo-1681276169450-4504a2442173?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  "https://images.unsplash.com/photo-1600721391776-b5cd0e0048f9?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  "https://images.unsplash.com/photo-1708220084835-1dd17a8ed8ad?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  "https://images.unsplash.com/photo-1708221235473-69e1500dd3bc?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  "https://images.unsplash.com/photo-1693212793204-bcea856c75fe?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=880",
+  "https://plus.unsplash.com/premium_photo-1757960107520-b0a8736c06fa?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
+  "https://plus.unsplash.com/premium_photo-1681276170291-27698ccc0a8e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  "https://plus.unsplash.com/premium_photo-1675107359685-f268487a3a46?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  "https://plus.unsplash.com/premium_photo-1675107359827-6de8bcf03ccf?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+  "https://plus.unsplash.com/premium_photo-1691030255383-ec9765ad5340?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"
 ];
 const PRICES = [
   '₹1,450', '₹1,290', '₹990', '₹2,299', '₹1,649', '₹1,800', '₹1,200', '₹2,700', '₹1,499', '₹1,399'
@@ -39,6 +40,7 @@ const productTypes = [
 ];
 
 export default function Earrings() {
+  const { addToCart } = useCart();
   return (
     <div className="bg-ms-cream min-h-screen">
       <Head>
@@ -110,7 +112,7 @@ export default function Earrings() {
           <div className="flex-1">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {IMAGES.map((src, i) => (
-                <div key={i} className="bg-white rounded-xl shadow-ms-card overflow-hidden hover:shadow-xl transition-shadow group">
+                <Link href={`/product/earring-${i}`} key={i} className="bg-white rounded-xl shadow-ms-card overflow-hidden hover:shadow-xl transition-shadow group">
                   <div className="relative">
                     <img src={src} alt={`Earring ${i+1}`} className="w-full h-64 object-cover" />
                     {/* Badge */}
@@ -140,11 +142,14 @@ export default function Earrings() {
                     </div>
                     <p className="text-sm text-ms-gold hover:text-ms-dark cursor-pointer mb-2">Check delivery date</p>
                     <h3 className="font-heading text-ms-gold text-base mb-3">Elegant Earring #{i+1}</h3>
-                    <button className="w-full bg-ms-gold hover:bg-ms-dark text-white py-2 rounded-lg font-heading transition-colors">
+                    <button 
+                      onClick={() => addToCart({ id: `earring-${i}`, name: `Elegant Earring #${i+1}`, image: src, price: PRICES[i % PRICES.length], type: 'Earrings' })}
+                      className="w-full bg-white border-2 border-ms-gold text-black hover:bg-ms-gold-light py-2 rounded-lg font-heading transition-colors"
+                    >
                       Add to Cart
                     </button>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
