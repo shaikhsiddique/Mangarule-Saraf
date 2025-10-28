@@ -1,5 +1,4 @@
 import Head from "next/head";
-import ProductCard from "../../components/ProductCard";
 import { useCart } from "../../context/CartContext";
 import Link from "next/link";
 
