@@ -8,7 +8,7 @@ export default function Login() {
   const [form, setForm] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const { refresh } = useAuth();
+  const { login } = useAuth();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -24,9 +24,15 @@ export default function Login() {
         const data = await res.json().catch(() => ({}));
         throw new Error(data.message || 'Login failed');
       }
-      // Cookie set; refresh auth state then go home
-      await refresh();
-      router.push('/');
+      const data = await res.json();
+      login(data.token, data.user);
+
+      // Redirect based on role
+      if (data.user.role === 'admin') {
+        router.push('/admin/dashboard');
+      } else {
+        router.push('/');
+      }
     } catch (err: any) {
       setError(err.message || 'Something went wrong');
     } finally {

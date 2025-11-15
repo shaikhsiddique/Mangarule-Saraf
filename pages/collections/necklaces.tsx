@@ -1,25 +1,12 @@
 import Head from "next/head";
-import Link from "next/link";
+import { useMemo } from "react";
 import { useCart } from "../../context/CartContext";
+import { useProducts } from "../../context/ProductContext";
+import Link from "next/link";
 
-const IMAGES = [
-  // Unsplash selection
-  "https://plus.unsplash.com/premium_photo-1674255466849-b23fc5f5d3eb?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
-  "https://images.unsplash.com/photo-1610694955371-d4a3e0ce4b52?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
-  "https://images.unsplash.com/photo-1708390250220-803af1100d31?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
-  "https://images.unsplash.com/photo-1685970731194-e27b477e87ba?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=688",
-  "https://images.unsplash.com/photo-1721103418218-416182aca079?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
-  "https://images.unsplash.com/photo-1682823544433-aae34df4e3da?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
-  // Additional jewelry images
-  "https://images.unsplash.com/photo-1650785468216-39788ac5a0dd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
-  "https://images.unsplash.com/photo-1680690935158-7b7f2d5259dd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735",
-  "https://images.unsplash.com/photo-1705326453292-f3d35cd96514?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
-  "https://images.unsplash.com/photo-1739194097821-a0fbea48a3f0?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=688",
- 
-];
-const PRICES = [
-  '₹3,990', '₹2,750', '₹5,500', '₹2,999', '₹4,299', '₹6,200', '₹3,799', '₹2,950', '₹4,849', '₹2,599'
-];
+
+
+
 
 const topFilters = [
   { name: 'All', active: true },
@@ -44,6 +31,12 @@ const productTypes = [
 
 export default function Necklaces() {
   const { addToCart } = useCart();
+  const { products: allProducts } = useProducts();
+
+  const products = useMemo(() => {
+    return allProducts.filter(product => product.type === 'necklaces');
+  }, [allProducts]);
+
   return (
     <div className="bg-ms-cream min-h-screen">
       <Head>
@@ -114,10 +107,10 @@ export default function Necklaces() {
           {/* Main Product Grid */}
           <div className="flex-1">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {IMAGES.map((src, i) => (
-                <Link key={i} href={`/product/necklace-${i}`} className="bg-white rounded-xl shadow-ms-card overflow-hidden hover:shadow-xl transition-shadow group block">
+              {products.length > 0 ? products.map((product, i) => (
+                <Link href={`/product/${product._id}`} key={product._id} className="bg-white rounded-xl shadow-ms-card overflow-hidden hover:shadow-xl transition-shadow group">
                   <div className="relative">
-                    <img src={src} alt={`Necklace ${i+1}`} className="w-full h-64 object-cover" />
+                    <img src={product.image} alt={product.name} className="w-full h-64 object-cover" />
                     {/* Badge */}
                     {i % 3 === 0 && (
                       <div className="absolute top-2 left-2 bg-yellow-400 text-black text-xs px-2 py-1 rounded font-bold">
@@ -138,27 +131,31 @@ export default function Necklaces() {
                   </div>
                   <div className="p-4">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-lg font-bold text-ms-gold">{PRICES[i % PRICES.length]}</span>
+                      <span className="text-lg font-bold text-ms-gold">{product.price}</span>
                       {i % 2 === 0 && (
                         <span className="text-sm text-gray-400 line-through">₹4,200</span>
                       )}
                     </div>
                     <p className="text-sm text-ms-gold hover:text-ms-dark cursor-pointer mb-2">Check delivery date</p>
-                    <h3 className="font-heading text-ms-gold text-base mb-3">Designer Necklace #{i+1}</h3>
-                    <button 
-                      onClick={(e) => {
-                        e.preventDefault();
-                        addToCart({ id: `necklace-${i}`, name: `Designer Necklace #${i+1}`, image: src, price: PRICES[i % PRICES.length], type: 'Necklaces' });
-                      }}
+                    <h3 className="font-heading text-ms-gold text-base mb-3">{product.name}</h3>
+                    <button
+                      onClick={() => addToCart({ id: product._id, name: product.name, image: product.image, price: product.price, type: product.type })}
                       className="w-full bg-white border-2 border-ms-gold text-black hover:bg-ms-gold-light py-2 rounded-lg font-heading transition-colors"
+                      disabled={product.stock === 0}
                     >
-                      Add to Cart
+                      {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
                     </button>
                   </div>
                 </Link>
-              ))}
+              )) : (
+                <div className="col-span-full text-center py-12">
+                  <p className="text-gray-500 text-lg">No products available in this collection.</p>
+                  <p className="text-gray-400 text-sm mt-2">Products will be added by the admin soon.</p>
+                </div>
+              )}
             </div>
           </div>
+
         </div>
       </div>
     </div>

@@ -2,11 +2,9 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/collections/daily-wear": "pages/collections/daily-wear.js",
-  "/cart": "pages/cart.js",
-  "/collections/rings": "pages/collections/rings.js",
+  "/": "pages/index.js",
   "/product/[id]": "pages/product/[id].js",
-  "/collections/bracelets": "pages/collections/bracelets.js",
   "/collections/earrings": "pages/collections/earrings.js",
+  "/api/products/[id]": "pages/api/products/[id].js",
   "/collections/necklaces": "pages/collections/necklaces.js"
 }

@@ -1,22 +1,9 @@
 import Head from "next/head";
+import { useMemo } from "react";
 import { useCart } from "../../context/CartContext";
+import { useProducts } from "../../context/ProductContext";
 import Link from "next/link";
 
-const IMAGES = [
-  "https://plus.unsplash.com/premium_photo-1681276169450-4504a2442173?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
-  "https://images.unsplash.com/photo-1600721391776-b5cd0e0048f9?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
-  "https://images.unsplash.com/photo-1708220084835-1dd17a8ed8ad?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
-  "https://images.unsplash.com/photo-1708221235473-69e1500dd3bc?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
-  "https://images.unsplash.com/photo-1693212793204-bcea856c75fe?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=880",
-  "https://plus.unsplash.com/premium_photo-1757960107520-b0a8736c06fa?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
-  "https://plus.unsplash.com/premium_photo-1681276170291-27698ccc0a8e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
-  "https://plus.unsplash.com/premium_photo-1675107359685-f268487a3a46?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
-  "https://plus.unsplash.com/premium_photo-1675107359827-6de8bcf03ccf?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
-  "https://plus.unsplash.com/premium_photo-1691030255383-ec9765ad5340?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"
-];
-const PRICES = [
-  '₹1,450', '₹1,290', '₹990', '₹2,299', '₹1,649', '₹1,800', '₹1,200', '₹2,700', '₹1,499', '₹1,399'
-];
 
 const topFilters = [
   { name: 'All', active: true },
@@ -41,6 +28,12 @@ const productTypes = [
 
 export default function Earrings() {
   const { addToCart } = useCart();
+  const { products: allProducts } = useProducts();
+
+  const products = useMemo(() => {
+    return allProducts.filter(product => product.type === 'earrings');
+  }, [allProducts]);
+
   return (
     <div className="bg-ms-cream min-h-screen">
       <Head>
@@ -111,10 +104,10 @@ export default function Earrings() {
           {/* Main Product Grid */}
           <div className="flex-1">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {IMAGES.map((src, i) => (
-                <Link href={`/product/earring-${i}`} key={i} className="bg-white rounded-xl shadow-ms-card overflow-hidden hover:shadow-xl transition-shadow group">
+              {products.length > 0 ? products.map((product, i) => (
+                <Link href={`/product/${product._id}`} key={product._id} className="bg-white rounded-xl shadow-ms-card overflow-hidden hover:shadow-xl transition-shadow group">
                   <div className="relative">
-                    <img src={src} alt={`Earring ${i+1}`} className="w-full h-64 object-cover" />
+                    <img src={product.image} alt={product.name} className="w-full h-64 object-cover" />
                     {/* Badge */}
                     {i % 3 === 0 && (
                       <div className="absolute top-2 left-2 bg-yellow-400 text-black text-xs px-2 py-1 rounded font-bold">
@@ -135,24 +128,31 @@ export default function Earrings() {
                   </div>
                   <div className="p-4">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-lg font-bold text-ms-gold">{PRICES[i % PRICES.length]}</span>
+                      <span className="text-lg font-bold text-ms-gold">{product.price}</span>
                       {i % 2 === 0 && (
                         <span className="text-sm text-gray-400 line-through">₹1,800</span>
                       )}
                     </div>
                     <p className="text-sm text-ms-gold hover:text-ms-dark cursor-pointer mb-2">Check delivery date</p>
-                    <h3 className="font-heading text-ms-gold text-base mb-3">Elegant Earring #{i+1}</h3>
-                    <button 
-                      onClick={() => addToCart({ id: `earring-${i}`, name: `Elegant Earring #${i+1}`, image: src, price: PRICES[i % PRICES.length], type: 'Earrings' })}
+                    <h3 className="font-heading text-ms-gold text-base mb-3">{product.name}</h3>
+                    <button
+                      onClick={() => addToCart({ id: product._id, name: product.name, image: product.image, price: product.price, type: product.type })}
                       className="w-full bg-white border-2 border-ms-gold text-black hover:bg-ms-gold-light py-2 rounded-lg font-heading transition-colors"
+                      disabled={product.stock === 0}
                     >
-                      Add to Cart
+                      {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
                     </button>
                   </div>
                 </Link>
-              ))}
+              )) : (
+                <div className="col-span-full text-center py-12">
+                  <p className="text-gray-500 text-lg">No products available in this collection.</p>
+                  <p className="text-gray-400 text-sm mt-2">Products will be added by the admin soon.</p>
+                </div>
+              )}
             </div>
           </div>
+
         </div>
       </div>
     </div>

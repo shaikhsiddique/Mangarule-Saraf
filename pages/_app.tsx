@@ -5,21 +5,29 @@ import Footer from "../components/Footer";
 import { CartProvider, useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import { AuthProvider } from "../context/AuthContext";
+import { ProductProvider } from "../context/ProductContext";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+
 
 function MyAppContent({ Component, pageProps }: AppProps) {
   const { cart } = useCart();
   const { user, loading } = useAuth();
   const router = useRouter();
   const publicRoutes = new Set<string>(['/login', '/signup']);
+  const adminRoutes = new Set<string>(['/admin/dashboard', '/admin/products', '/admin/users']);
   const isPublic = publicRoutes.has(router.pathname);
+  const isAdminRoute = adminRoutes.has(router.pathname);
   // Redirect unauthenticated users away from private routes in an effect
   useEffect(() => {
-    if (!loading && !user && !isPublic) {
-      router.replace('/login');
+    if (!loading) {
+      if (!user && !isPublic) {
+        router.replace('/login');
+      } else if (user && isAdminRoute && user.role !== 'admin') {
+        router.replace('/');
+      }
     }
-  }, [loading, user, isPublic, router]);
+  }, [loading, user, isPublic, isAdminRoute, router]);
   return (
     <>
       <Navbar cartCount={cart.reduce((sum, item) => sum + item.quantity, 0)} />
@@ -39,7 +47,9 @@ export default function App(props: AppProps) {
   return (
     <AuthProvider>
       <CartProvider>
-        <MyAppContent {...props} />
+        <ProductProvider>
+          <MyAppContent {...props} />
+        </ProductProvider>
       </CartProvider>
     </AuthProvider>
   );

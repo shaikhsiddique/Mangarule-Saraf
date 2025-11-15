@@ -5,6 +5,7 @@ export type AuthUser = {
   name: string;
   email: string;
   phone: string;
+  role?: string;
   cart?: any[];
 };
 
@@ -13,6 +14,7 @@ type AuthContextType = {
   loading: boolean;
   refresh: () => Promise<void>;
   logout: () => Promise<void>;
+  login: (token: string, userData: AuthUser) => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -27,18 +29,36 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const login = (token: string, userData: AuthUser) => {
+    localStorage.setItem('auth_token', token);
+    setUser(userData);
+  };
+
   const refresh = async () => {
     try {
       setLoading(true);
-      const res = await fetch('/api/auth/me');
+      const token = localStorage.getItem('auth_token');
+      if (!token) {
+        setUser(null);
+        return;
+      }
+
+      const res = await fetch('/api/auth/me', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
       if (res.ok) {
         const data = await res.json();
         setUser(data);
       } else {
         setUser(null);
+        localStorage.removeItem('auth_token');
       }
     } catch {
       setUser(null);
+      localStorage.removeItem('auth_token');
     } finally {
       setLoading(false);
     }
@@ -46,7 +66,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = async () => {
     try {
-      await fetch('/api/auth/logout', { method: 'POST' });
+      localStorage.removeItem('auth_token');
+      setUser(null);
     } finally {
       setUser(null);
     }
@@ -57,7 +78,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, loading, refresh, logout }}>
+    <AuthContext.Provider value={{ user, loading, refresh, logout, login }}>
       {children}
     </AuthContext.Provider>
   );

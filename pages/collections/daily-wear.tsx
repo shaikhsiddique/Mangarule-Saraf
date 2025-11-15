@@ -1,22 +1,9 @@
 import Head from "next/head";
+import { useMemo } from "react";
 import { useCart } from "../../context/CartContext";
+import { useProducts } from "../../context/ProductContext";
 import Link from "next/link";
 
-const IMAGES = [
-  "https://images.unsplash.com/photo-1611652022419-a9419f74343d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=688",
-  "https://plus.unsplash.com/premium_photo-1674748385436-db725f68e312?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
-  "https://plus.unsplash.com/premium_photo-1669835163351-785a187cdf95?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735",
-  "https://plus.unsplash.com/premium_photo-1739548338276-e9c3a49b3a95?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
-  "https://plus.unsplash.com/premium_photo-1739548332792-8fae4d490124?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1171",
-  "https://plus.unsplash.com/premium_photo-1669366530656-66be1ff89245?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
-  "https://images.unsplash.com/photo-1689776948405-23aee5f305fe?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=765",
-  "https://images.unsplash.com/photo-1721103418981-0ee59b80592e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
-  "https://plus.unsplash.com/premium_photo-1724075323544-64a09f14f80b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=702",
-  "https://plus.unsplash.com/premium_photo-1679448062006-089bb6570bdd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"
-];
-const PRICES = [
-  '₹2,490', '₹2,100', '₹1,650', '₹3,399', '₹2,299', '₹2,800', '₹2,700', '₹3,100', '₹2,999', '₹1,899'
-];
 
 const topFilters = [
   { name: 'All', active: true },
@@ -41,6 +28,12 @@ const productTypes = [
 
 export default function DailyWear() {
   const { addToCart } = useCart();
+  const { products: allProducts } = useProducts();
+
+  const products = useMemo(() => {
+    return allProducts.filter(product => product.type === 'daily-wear');
+  }, [allProducts]);
+
   return (
     <div className="bg-ms-cream min-h-screen">
       <Head>
@@ -111,10 +104,10 @@ export default function DailyWear() {
           {/* Main Product Grid */}
           <div className="flex-1">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {IMAGES.map((src, i) => (
-                <Link href={`/product/daily-${i}`}  key={i} className="bg-white rounded-xl shadow-ms-card overflow-hidden hover:shadow-xl transition-shadow group">
+              {products.length > 0 ? products.map((product, i) => (
+                <Link href={`/product/${product._id}`} key={product._id} className="bg-white rounded-xl shadow-ms-card overflow-hidden hover:shadow-xl transition-shadow group">
                   <div className="relative">
-                    <img src={src} alt={`Daily Wear Jewelry ${i+1}`} className="w-full h-64 object-cover" />
+                    <img src={product.image} alt={product.name} className="w-full h-64 object-cover" />
                     {/* Badge */}
                     {i % 3 === 0 && (
                       <div className="absolute top-2 left-2 bg-yellow-400 text-black text-xs px-2 py-1 rounded font-bold">
@@ -135,24 +128,31 @@ export default function DailyWear() {
                   </div>
                   <div className="p-4">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-lg font-bold text-ms-gold">{PRICES[i % PRICES.length]}</span>
+                      <span className="text-lg font-bold text-ms-gold">{product.price}</span>
                       {i % 2 === 0 && (
                         <span className="text-sm text-gray-400 line-through">₹3,200</span>
                       )}
                     </div>
                     <p className="text-sm text-ms-gold hover:text-ms-dark cursor-pointer mb-2">Check delivery date</p>
-                    <h3 className="font-heading text-ms-gold text-base mb-3">Everyday Piece #{i+1}</h3>
-                    <button 
-                      onClick={() => addToCart({ id: `daily-${i}`, name: `Everyday Piece #${i+1}`, image: src, price: PRICES[i % PRICES.length], type: 'Daily Wear' })}
+                    <h3 className="font-heading text-ms-gold text-base mb-3">{product.name}</h3>
+                    <button
+                      onClick={() => addToCart({ id: product._id, name: product.name, image: product.image, price: product.price, type: product.type })}
                       className="w-full bg-white border-2 border-ms-gold text-black hover:bg-ms-gold-light py-2 rounded-lg font-heading transition-colors"
+                      disabled={product.stock === 0}
                     >
-                      Add to Cart
+                      {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
                     </button>
                   </div>
                 </Link>
-              ))}
+              )) : (
+                <div className="col-span-full text-center py-12">
+                  <p className="text-gray-500 text-lg">No products available in this collection.</p>
+                  <p className="text-gray-400 text-sm mt-2">Products will be added by the admin soon.</p>
+                </div>
+              )}
             </div>
           </div>
+
         </div>
       </div>
     </div>
