@@ -1,32 +1,12 @@
-# Admin Panel Implementation TODO
+# TODO: Fix 401 Error on /api/auth/me
 
-## Database Schema Updates
-- [ ] Create Product model (server/models/Product.ts)
-- [ ] Update User model to add role field (server/models/User.ts)
+## Steps to Complete
+- [x] Update context/AuthContext.tsx to use 'token' as localStorage key instead of 'auth_token'
+- [x] Update pages/admin/login.tsx to use 'token' as localStorage key instead of 'auth_token'
+- [ ] Redeploy the project on Vercel
+- [ ] Test login flow (user and admin) to verify /api/auth/me returns 200 instead of 401
 
-## Authentication & Access Control
-- [ ] Update auth utils to include role checking (server/utils/auth.ts)
-- [ ] Create admin middleware for protecting routes
-
-## API Endpoints
-- [ ] Create /api/admin/products.ts (CRUD operations)
-- [ ] Create /api/admin/users.ts (fetch all users)
-- [ ] Create /api/products.ts (public product fetching by collection)
-
-## Admin Pages
-- [ ] Create /admin/dashboard.tsx (overview with stats)
-- [ ] Create /admin/products.tsx (product management)
-- [ ] Create /admin/users.tsx (user management)
-
-## Frontend Updates
-- [ ] Update Navbar to show admin link for admins (components/Navbar.tsx)
-- [ ] Update _app.tsx to handle admin routes
-- [ ] Update collection pages to fetch products dynamically
-- [ ] Migrate hardcoded products to database
-
-## Testing & Validation
-- [ ] Test admin authentication
-- [ ] Test product CRUD operations
-- [ ] Test user management
-- [ ] Test public product fetching
-- [ ] Verify collection pages work with dynamic data
+## New Issues: 500 Internal Server Errors
+- [ ] Investigate 500 error on GET /api/products
+- [ ] Investigate 500 error on POST /api/auth/login
+- [ ] Check Vercel logs for server-side errors (e.g., MongoDB connection, environment variables)

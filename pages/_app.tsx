@@ -1,3 +1,5 @@
+'use client';
+
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import dynamic from 'next/dynamic';
@@ -8,6 +10,7 @@ import { AuthProvider } from "../context/AuthContext";
 import { ProductProvider } from "../context/ProductContext";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+
 
 const Navbar = dynamic(() => import('../components/Navbar'), { ssr: false });
 

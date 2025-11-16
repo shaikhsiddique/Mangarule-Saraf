@@ -35,7 +35,7 @@ export default function AdminLogin() {
 
         if (userData.role === 'admin') {
           // Set token in localStorage for subsequent requests
-          localStorage.setItem('auth_token', data.token);
+          localStorage.setItem('token', data.token);
           router.push('/admin/dashboard');
         } else {
           setError('Access denied. This login is for administrators only.');

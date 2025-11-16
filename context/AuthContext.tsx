@@ -30,18 +30,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   const login = (token: string, userData: AuthUser) => {
-    localStorage.setItem('auth_token', token);
+    localStorage.setItem('token', token);
     setUser(userData);
   };
+
 
   const refresh = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem('auth_token');
+      const token = localStorage.getItem('token');
       if (!token) {
         setUser(null);
         return;
       }
+
 
       const res = await fetch('/api/auth/me', {
         headers: {
@@ -54,24 +56,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser(data);
       } else {
         setUser(null);
-        localStorage.removeItem('auth_token');
+        localStorage.removeItem('token');
       }
+
     } catch {
       setUser(null);
-      localStorage.removeItem('auth_token');
+      localStorage.removeItem('token');
     } finally {
+
       setLoading(false);
     }
   };
 
   const logout = async () => {
     try {
-      localStorage.removeItem('auth_token');
+      localStorage.removeItem('token');
       setUser(null);
     } finally {
       setUser(null);
     }
   };
+
 
   useEffect(() => {
     refresh();
@@ -83,5 +88,3 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     </AuthContext.Provider>
   );
 }
-
-
