@@ -19,6 +19,7 @@ export default function AdminProducts() {
   const { user, loading } = useAuth();
   const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
+  console.log(products)
   const [showForm, setShowForm] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [formData, setFormData] = useState({

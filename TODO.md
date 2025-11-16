@@ -1,32 +1,9 @@
-# Admin Panel Implementation TODO
+# TODO: Fix Admin Login Page Accessibility
 
-## Database Schema Updates
-- [ ] Create Product model (server/models/Product.ts)
-- [ ] Update User model to add role field (server/models/User.ts)
+## Tasks to Complete
+- [x] Update `pages/_app.tsx` to include `/admin/login` in the `publicRoutes` set
 
-## Authentication & Access Control
-- [ ] Update auth utils to include role checking (server/utils/auth.ts)
-- [ ] Create admin middleware for protecting routes
-
-## API Endpoints
-- [ ] Create /api/admin/products.ts (CRUD operations)
-- [ ] Create /api/admin/users.ts (fetch all users)
-- [ ] Create /api/products.ts (public product fetching by collection)
-
-## Admin Pages
-- [ ] Create /admin/dashboard.tsx (overview with stats)
-- [ ] Create /admin/products.tsx (product management)
-- [ ] Create /admin/users.tsx (user management)
-
-## Frontend Updates
-- [ ] Update Navbar to show admin link for admins (components/Navbar.tsx)
-- [ ] Update _app.tsx to handle admin routes
-- [ ] Update collection pages to fetch products dynamically
-- [ ] Migrate hardcoded products to database
-
-## Testing & Validation
-- [ ] Test admin authentication
-- [ ] Test product CRUD operations
-- [ ] Test user management
-- [ ] Test public product fetching
-- [ ] Verify collection pages work with dynamic data
+- [ ] Test the application by navigating to the admin login page (via navbar link or user login page link) to confirm it opens without redirecting to user login
+- [ ] Verify that logging in as an admin from `/admin/login` correctly redirects to `/admin/dashboard`
+- [ ] Ensure non-admin users are properly denied access in the admin login flow
+- [x] Run the app and perform end-to-end testing for both user and admin login flows

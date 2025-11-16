@@ -12,11 +12,6 @@
   ],
   "rootMainFiles": [],
   "pages": {
-    "/": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/index.js"
-    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -27,45 +22,20 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/admin/dashboard": [
+    "/collections/daily-wear": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/admin/dashboard.js"
+      "static/chunks/pages/collections/daily-wear.js"
     ],
-    "/admin/users": [
+    "/collections/mangalsutra": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/admin/users.js"
-    ],
-    "/cart": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/cart.js"
-    ],
-    "/collections/bracelets": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/collections/bracelets.js"
-    ],
-    "/collections/earrings": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/collections/earrings.js"
+      "static/chunks/pages/collections/mangalsutra.js"
     ],
     "/collections/rings": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/collections/rings.js"
-    ],
-    "/login": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/login.js"
-    ],
-    "/product/[id]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/product/[id].js"
     ]
   },
   "ampFirstPages": []

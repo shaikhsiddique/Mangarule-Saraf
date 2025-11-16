@@ -2,20 +2,9 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/login": "pages/login.js",
+  "/api/products": "pages/api/products.js",
   "/api/auth/me": "pages/api/auth/me.js",
   "/collections/rings": "pages/collections/rings.js",
-  "/product/[id]": "pages/product/[id].js",
-  "/api/cart/upsert": "pages/api/cart/upsert.js",
-  "/api/products/[id]": "pages/api/products/[id].js",
-  "/api/auth/login": "pages/api/auth/login.js",
-  "/admin/dashboard": "pages/admin/dashboard.js",
-  "/api/admin/products": "pages/api/admin/products.js",
-  "/api/admin/users": "pages/api/admin/users.js",
-  "/cart": "pages/cart.js",
-  "/admin/users": "pages/admin/users.js",
-  "/collections/bracelets": "pages/collections/bracelets.js",
-  "/": "pages/index.js",
-  "/api/products": "pages/api/products.js",
-  "/collections/earrings": "pages/collections/earrings.js"
+  "/collections/mangalsutra": "pages/collections/mangalsutra.js",
+  "/collections/daily-wear": "pages/collections/daily-wear.js"
 }

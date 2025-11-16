@@ -14,7 +14,8 @@ function MyAppContent({ Component, pageProps }: AppProps) {
   const { cart } = useCart();
   const { user, loading } = useAuth();
   const router = useRouter();
-  const publicRoutes = new Set<string>(['/login', '/signup']);
+  const publicRoutes = new Set<string>(['/login', '/signup', '/admin/login']);
+
   const adminRoutes = new Set<string>(['/admin/dashboard', '/admin/products', '/admin/users']);
   const isPublic = publicRoutes.has(router.pathname);
   const isAdminRoute = adminRoutes.has(router.pathname);

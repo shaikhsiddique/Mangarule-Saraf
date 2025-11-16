@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
+import { useAuth } from '../../context/AuthContext';
+
+
 
 export default function AdminLogin() {
   const [email, setEmail] = useState('');
@@ -9,6 +12,8 @@ export default function AdminLogin() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
+  const { login } = useAuth();
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,12 +39,12 @@ export default function AdminLogin() {
         const userData = await meRes.json();
 
         if (userData.role === 'admin') {
-          // Set token in localStorage for subsequent requests
-          localStorage.setItem('auth_token', data.token);
+          login(data.token, userData);
           router.push('/admin/dashboard');
         } else {
           setError('Access denied. This login is for administrators only.');
         }
+
       } else {
         setError(data.message || 'Login failed');
       }
