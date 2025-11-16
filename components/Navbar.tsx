@@ -57,7 +57,7 @@ export default function Navbar({ cartCount = 0 }: { cartCount?: number }) {
                   Admin
                 </Link>
               )}
-              <button onClick={async () => { await fetch('/api/auth/logout', { method: 'POST' }); await router.replace('/login'); }} className="hidden md:inline px-3 py-1 text-sm rounded bg-white border-2 border-ms-gold text-black hover:bg-ms-gold-light font-heading">Logout</button>
+              <button onClick={async () => { await logout(); await router.replace('/login'); }} className="hidden md:inline px-3 py-1 text-sm rounded bg-white border-2 border-ms-gold text-black hover:bg-ms-gold-light font-heading">Logout</button>
             </>
           )}
           <Link href="/cart" className="relative flex items-center ml-2">

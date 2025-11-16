@@ -1,9 +1,11 @@
 import Head from 'next/head';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { useAuth } from '../context/AuthContext';
 
 export default function Signup() {
   const router = useRouter();
+  const { login } = useAuth();
   const [form, setForm] = useState({ name: '', email: '', password: '', phone: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -22,7 +24,8 @@ export default function Signup() {
         const data = await res.json().catch(() => ({}));
         throw new Error(data.message || 'Registration failed');
       }
-      // Auto logged in via cookie; go home
+      const data = await res.json();
+      login(data.token, data.user);
       router.push('/');
     } catch (err: any) {
       setError(err.message || 'Something went wrong');
@@ -30,6 +33,7 @@ export default function Signup() {
       setLoading(false);
     }
   }
+
 
   return (
     <div className="bg-ms-cream min-h-screen">
@@ -51,5 +55,3 @@ export default function Signup() {
     </div>
   );
 }
-
-

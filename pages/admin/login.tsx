@@ -53,23 +53,24 @@ export default function AdminLogin() {
   return (
     <>
       <Head>
-        <title>Admin Login - Mangarule Saraf</title>
+        <title>Admin Portal - Mangarule Saraf</title>
       </Head>
-      <div className="min-h-screen bg-gradient-to-br from-ms-gold-light to-white flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-gradient-to-br from-red-50 to-white flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
-            <div className="mx-auto h-12 w-12 flex items-center justify-center rounded-full bg-ms-gold">
+            <div className="mx-auto h-12 w-12 flex items-center justify-center rounded-full bg-red-500">
               <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
               </svg>
             </div>
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 font-heading">
-              Admin Login
+              Admin Portal Login
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
-              Sign in to access the admin panel
+              Secure access for administrators only - manage products and users
             </p>
           </div>
+
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
@@ -112,17 +113,18 @@ export default function AdminLogin() {
               <button
                 type="submit"
                 disabled={loading}
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-ms-gold hover:bg-ms-gold-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ms-gold disabled:opacity-50"
+                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50"
               >
-                {loading ? 'Signing in...' : 'Sign in as Admin'}
+                {loading ? 'Signing in...' : 'Enter Admin Portal'}
               </button>
             </div>
 
             <div className="text-center">
-              <Link href="/login" className="text-sm text-ms-gold hover:text-ms-dark">
-                Regular user login
+              <Link href="/login" className="text-sm text-red-600 hover:text-red-800">
+                Customer Login
               </Link>
             </div>
+
           </form>
         </div>
       </div>
