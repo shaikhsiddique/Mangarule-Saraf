@@ -9,6 +9,6 @@ export async function connectMongo() {
     isConnected = 1;
     return;
   }
-  await mongoose.connect(uri, { dbName: process.env.MONGO_DB || 'mangarule-saraf' });
+  await mongoose.connect(uri, { dbName: process.env.MONGO_DB || 'Man' });
   isConnected = 1;
 }
