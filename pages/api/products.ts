@@ -9,9 +9,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     await connectMongo();
     const { type } = req.query;
 
-    let query = { isActive: true };
+    let query: { isActive: boolean; type?: string } = { isActive: true };
     if (type && typeof type === 'string') {
-      query = { ...query, type };
+      query.type = type;
     }
 
     const products = await Product.find(query).sort({ createdAt: -1 });
