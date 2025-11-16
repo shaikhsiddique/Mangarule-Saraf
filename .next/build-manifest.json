@@ -1,141 +1,36 @@
 {
   "polyfillFiles": [
-    "static/chunks/polyfills-c67a75d1b6f99dc8.js"
+    "static/chunks/polyfills.js"
   ],
-  "devFiles": [],
+  "devFiles": [
+    "static/chunks/react-refresh.js"
+  ],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/pEh25R6j8vxdTFfBRJ288/_buildManifest.js",
-    "static/pEh25R6j8vxdTFfBRJ288/_ssgManifest.js"
+    "static/development/_buildManifest.js",
+    "static/development/_ssgManifest.js"
   ],
   "rootMainFiles": [],
   "pages": {
     "/": [
-      "static/chunks/webpack-37e1db8e28ce4c01.js",
-      "static/chunks/framework-5429a50ba5373c56.js",
-      "static/chunks/main-fdf56fc4602be5bb.js",
-      "static/chunks/pages/index-81b304dbaac8aa38.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/index.js"
     ],
     "/_app": [
-      "static/chunks/webpack-37e1db8e28ce4c01.js",
-      "static/chunks/framework-5429a50ba5373c56.js",
-      "static/chunks/main-fdf56fc4602be5bb.js",
-      "static/css/083242dbb5d3b5ea.css",
-      "static/chunks/pages/_app-289126d5eaac4921.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/_app.js"
     ],
     "/_error": [
-      "static/chunks/webpack-37e1db8e28ce4c01.js",
-      "static/chunks/framework-5429a50ba5373c56.js",
-      "static/chunks/main-fdf56fc4602be5bb.js",
-      "static/chunks/pages/_error-b6491f42fb2263bb.js"
-    ],
-    "/about": [
-      "static/chunks/webpack-37e1db8e28ce4c01.js",
-      "static/chunks/framework-5429a50ba5373c56.js",
-      "static/chunks/main-fdf56fc4602be5bb.js",
-      "static/chunks/pages/about-1a3f89bb9faa461d.js"
-    ],
-    "/admin/dashboard": [
-      "static/chunks/webpack-37e1db8e28ce4c01.js",
-      "static/chunks/framework-5429a50ba5373c56.js",
-      "static/chunks/main-fdf56fc4602be5bb.js",
-      "static/chunks/pages/admin/dashboard-339bb6572a5683bf.js"
-    ],
-    "/admin/login": [
-      "static/chunks/webpack-37e1db8e28ce4c01.js",
-      "static/chunks/framework-5429a50ba5373c56.js",
-      "static/chunks/main-fdf56fc4602be5bb.js",
-      "static/chunks/pages/admin/login-097f4fa714d28e7e.js"
-    ],
-    "/admin/products": [
-      "static/chunks/webpack-37e1db8e28ce4c01.js",
-      "static/chunks/framework-5429a50ba5373c56.js",
-      "static/chunks/main-fdf56fc4602be5bb.js",
-      "static/chunks/pages/admin/products-ba3b45cf2a54e28f.js"
-    ],
-    "/admin/users": [
-      "static/chunks/webpack-37e1db8e28ce4c01.js",
-      "static/chunks/framework-5429a50ba5373c56.js",
-      "static/chunks/main-fdf56fc4602be5bb.js",
-      "static/chunks/pages/admin/users-876d3e8661e0259c.js"
-    ],
-    "/cart": [
-      "static/chunks/webpack-37e1db8e28ce4c01.js",
-      "static/chunks/framework-5429a50ba5373c56.js",
-      "static/chunks/main-fdf56fc4602be5bb.js",
-      "static/chunks/pages/cart-f01f0f6dacde816e.js"
-    ],
-    "/checkout": [
-      "static/chunks/webpack-37e1db8e28ce4c01.js",
-      "static/chunks/framework-5429a50ba5373c56.js",
-      "static/chunks/main-fdf56fc4602be5bb.js",
-      "static/chunks/pages/checkout-2dbd5737f0fe53e1.js"
-    ],
-    "/collections/bracelets": [
-      "static/chunks/webpack-37e1db8e28ce4c01.js",
-      "static/chunks/framework-5429a50ba5373c56.js",
-      "static/chunks/main-fdf56fc4602be5bb.js",
-      "static/chunks/pages/collections/bracelets-5ab4c6da3b198c07.js"
-    ],
-    "/collections/daily-wear": [
-      "static/chunks/webpack-37e1db8e28ce4c01.js",
-      "static/chunks/framework-5429a50ba5373c56.js",
-      "static/chunks/main-fdf56fc4602be5bb.js",
-      "static/chunks/pages/collections/daily-wear-67f7f5668012f67d.js"
-    ],
-    "/collections/earrings": [
-      "static/chunks/webpack-37e1db8e28ce4c01.js",
-      "static/chunks/framework-5429a50ba5373c56.js",
-      "static/chunks/main-fdf56fc4602be5bb.js",
-      "static/chunks/pages/collections/earrings-0e3f21f8657d861c.js"
-    ],
-    "/collections/mangalsutra": [
-      "static/chunks/webpack-37e1db8e28ce4c01.js",
-      "static/chunks/framework-5429a50ba5373c56.js",
-      "static/chunks/main-fdf56fc4602be5bb.js",
-      "static/chunks/pages/collections/mangalsutra-f4ef5f793ba680bb.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/_error.js"
     ],
     "/collections/necklaces": [
-      "static/chunks/webpack-37e1db8e28ce4c01.js",
-      "static/chunks/framework-5429a50ba5373c56.js",
-      "static/chunks/main-fdf56fc4602be5bb.js",
-      "static/chunks/pages/collections/necklaces-bca6c5583830ce87.js"
-    ],
-    "/collections/party-wear": [
-      "static/chunks/webpack-37e1db8e28ce4c01.js",
-      "static/chunks/framework-5429a50ba5373c56.js",
-      "static/chunks/main-fdf56fc4602be5bb.js",
-      "static/chunks/pages/collections/party-wear-cdcafe99de9f2e7e.js"
-    ],
-    "/collections/rings": [
-      "static/chunks/webpack-37e1db8e28ce4c01.js",
-      "static/chunks/framework-5429a50ba5373c56.js",
-      "static/chunks/main-fdf56fc4602be5bb.js",
-      "static/chunks/pages/collections/rings-64e712077ca2f885.js"
-    ],
-    "/feedback": [
-      "static/chunks/webpack-37e1db8e28ce4c01.js",
-      "static/chunks/framework-5429a50ba5373c56.js",
-      "static/chunks/main-fdf56fc4602be5bb.js",
-      "static/chunks/pages/feedback-7eabe5116532d100.js"
-    ],
-    "/login": [
-      "static/chunks/webpack-37e1db8e28ce4c01.js",
-      "static/chunks/framework-5429a50ba5373c56.js",
-      "static/chunks/main-fdf56fc4602be5bb.js",
-      "static/chunks/pages/login-bb72826dc5ef4f62.js"
-    ],
-    "/product/[id]": [
-      "static/chunks/webpack-37e1db8e28ce4c01.js",
-      "static/chunks/framework-5429a50ba5373c56.js",
-      "static/chunks/main-fdf56fc4602be5bb.js",
-      "static/chunks/pages/product/[id]-ec2fd21e9c312a83.js"
-    ],
-    "/signup": [
-      "static/chunks/webpack-37e1db8e28ce4c01.js",
-      "static/chunks/framework-5429a50ba5373c56.js",
-      "static/chunks/main-fdf56fc4602be5bb.js",
-      "static/chunks/pages/signup-664e42b1e019af90.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/collections/necklaces.js"
     ]
   },
   "ampFirstPages": []

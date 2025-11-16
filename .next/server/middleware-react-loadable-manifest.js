@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST='{"_app.tsx -> ../components/Navbar":{"id":6624,"files":["static/chunks/624.cd07d806fe61e07a.js"]}}';
+self.__REACT_LOADABLE_MANIFEST="{\"_app.tsx -> ../components/Navbar\":{\"id\":\"_app.tsx -> ../components/Navbar\",\"files\":[\"static/chunks/components_Navbar_tsx.js\"]}}"

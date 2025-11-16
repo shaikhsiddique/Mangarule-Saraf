@@ -48,7 +48,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
     const syncFromServer = async () => {
       if (!user) return;
       try {
-        const res = await fetch('/api/auth/me');
+        const token = localStorage.getItem('token');
+        if (!token) return;
+        const res = await fetch('/api/auth/me', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
         if (res.ok) {
           const data = await res.json();
           if (Array.isArray(data.cart)) setCart(data.cart);
@@ -81,11 +87,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
     // Persist to backend if logged in
     if (user) {
       try {
-        fetch('/api/cart/upsert', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ...item, quantity: 1 })
-        });
+        const token = localStorage.getItem('token');
+        if (token) {
+          fetch('/api/cart/upsert', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ ...item, quantity: 1 })
+          });
+        }
       } catch {}
     }
   }
