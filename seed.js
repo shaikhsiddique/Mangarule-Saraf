@@ -24,12 +24,12 @@ const User = mongoose.model("User", userSchema);
 
 async function seedDatabase() {
   try {
-    // Connect to MongoDB
-    const mongoUri =
-      "mongodb+srv://Prabhat:suprabhat123@cluster0.zjkfkty.mongodb.net/Man";
-    console.log("Using URI:", mongoUri);
+    // Connect to MongoDB using same logic as app
+    const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017';
+    const dbName = process.env.MONGO_DB || 'Man';
+    console.log("Using URI:", mongoUri, "DB:", dbName);
 
-    await mongoose.connect(mongoUri, { dbName: "Man" });
+    await mongoose.connect(mongoUri, { dbName });
 
     console.log("Connected to MongoDB");
 

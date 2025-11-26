@@ -1,9 +1,13 @@
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function Cart() {
   const { cart, addToCart, decrementQuantity, removeFromCart, clearCart } = useCart();
+  const { user } = useAuth();
+  const [placingOrder, setPlacingOrder] = useState(false);
   function getPriceValue(price: string|undefined) {
     return parseInt((price || '').replace(/[^\d]/g, ''), 10) || 0;
   }
@@ -18,6 +22,42 @@ export default function Cart() {
 
   function handleClearCart() {
     if (window.confirm('This will remove all items from your cart. Continue?')) clearCart();
+  }
+
+  async function handleOrderNow() {
+    if (!user) {
+      alert('Please log in to place an order.');
+      return;
+    }
+    if (cart.length === 0) return;
+
+    setPlacingOrder(true);
+    try {
+      const token = localStorage.getItem('auth_token');
+      const res = await fetch('/api/orders/place', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          items: cart,
+          total: subtotal,
+        }),
+      });
+
+      if (res.ok) {
+        alert('Order placed successfully!');
+        clearCart();
+      } else {
+        const error = await res.json();
+        alert(`Failed to place order: ${error.message}`);
+      }
+    } catch (error) {
+      alert('An error occurred while placing the order.');
+    } finally {
+      setPlacingOrder(false);
+    }
   }
 
   return (
@@ -61,7 +101,16 @@ export default function Cart() {
           </ul>
           <div className="flex flex-col sm:flex-row justify-between items-center mt-8 mb-4 px-2">
             <div className="text-lg font-bold text-ms-gold font-heading">Subtotal: ₹{subtotal.toLocaleString()}</div>
-            <Link href="/checkout" className="mt-4 sm:mt-0 ml-0 sm:ml-2 bg-ms-gold hover:bg-ms-dark text-white font-heading px-7 py-2 rounded-full shadow transition-all text-center">Checkout</Link>
+            <div className="flex gap-2 mt-4 sm:mt-0">
+              <button
+                onClick={handleOrderNow}
+                disabled={placingOrder}
+                className="bg-green-600 hover:bg-green-700 text-white font-heading px-7 py-2 rounded-full shadow transition-all disabled:opacity-50"
+              >
+                {placingOrder ? 'Placing Order...' : 'Order Now'}
+              </button>
+              <Link href="/checkout" className="bg-ms-gold hover:bg-ms-dark text-white font-heading px-7 py-2 rounded-full shadow transition-all text-center">Checkout</Link>
+            </div>
           </div>
           <button onClick={handleClearCart} className="block mx-auto mt-1 text-xs text-ms-dark border-b border-ms-gold-light hover:text-red-600">Clear Cart</button>
         </div>
